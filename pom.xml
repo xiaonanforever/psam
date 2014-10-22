@@ -1,0 +1,253 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.topdot</groupId>
+	<artifactId>psam</artifactId>
+	<version>0.14.02.13-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>psam</name>
+	<url>http://maven.apache.org</url>
+	
+	<parent>
+		<groupId>com.cslc.aom</groupId>
+		<artifactId>aggregator</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../aggregator/pom.xml</relativePath>
+	</parent>
+	
+	<dependencies>
+		<!-- 研究学习 -->
+		<!-- Java Socket Lib over NIO -->
+		<!--  
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+			<version>2.0.7</version>
+			<type>bundle</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-integration-beans</artifactId>
+			<version>2.0.7</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-integration-jmx</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-statemachine</artifactId>
+			<version>2.0.7</version>
+		</dependency>-->
+		<!-- 串口通信库 -->
+		<!--  
+		<dependency>
+			<groupId>org.rxtx</groupId>
+			<artifactId>rxtx</artifactId>
+			<version>2.1.7</version>
+			<scope>provided</scope>
+		</dependency>
+		-->
+		<!-- Test Dependency -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.0</version>
+					<dependencies>
+						<dependency><!-- add support for ssh/scp -->
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-ssh</artifactId>
+							<version>1.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<finalName>PSAM</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${compileSource}</source>
+					<target>${compileSource}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- 生成项目站点 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<!-- <version>3.2</version> -->
+				<configuration>
+					<!--<locales>zh_CN</locales> -->
+					<reportPlugins>
+						<!-- 项目标准报告 -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.6</version>
+							<configuration>
+								<dependencyDetailsEnabled>true</dependencyDetailsEnabled>
+								<dependencyLocationsEnabled>true</dependencyLocationsEnabled>
+							</configuration>
+							<reports>
+								<report>summary</report>
+								<report>project-team</report>
+								<report>modules</report>
+								<report>dependencies</report>
+								<report>dependency-convergence</report>
+								<report>dependency-management</report>
+								<report>distribution-management</report>
+								<report>issue-tracking</report>
+								<report>scm</report>
+								<report>cim</report>
+								<report>plugins</report>
+								<report>plugin-management</report>
+								<report>mailing-list</report>
+								<report>license</report>
+								<report>index</report>
+							</reports>
+						</plugin>
+						<!-- 报告插件 -->
+						<!-- JavaDoc 报告插件 -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.9</version>
+						</plugin>
+						<!-- 查看源代码 -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-jxr-plugin</artifactId>
+							<version>2.3</version>
+							<configuration>
+								<aggregate>true</aggregate><!-- -->
+							</configuration>
+						</plugin>
+						<!-- Checkstyle 代码规范检查 -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-checkstyle-plugin</artifactId>
+							<version>2.5</version>
+							<configuration>
+								<configLocation>${basedir}/src/main/resources/check/checkstyle.xml</configLocation>
+							</configuration>
+						</plugin>
+						<!-- Java 源代码分析工具插件 -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-pmd-plugin</artifactId>
+							<version>3.0</version>
+							<configuration>
+								<aggregate>true</aggregate>
+								<targetJdk>${compileSource}</targetJdk>
+								<!-- PMD 默认使用规则为:rulesets/basic.xml、rulesets/unusedcode.xml、rulesets/imports.xml 
+									下面是额外增加的 -->
+								<rulesets>
+									<ruleset>${basedir}/src/main/resources/check/pmd.xml</ruleset>
+								</rulesets>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-changelog-plugin</artifactId>
+							<version>2.2</version>
+							<configuration>
+								<type>range</type>
+								<range>60</range>
+							</configuration>
+						</plugin>
+						<!-- 生成测试覆盖率 -->
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>cobertura-maven-plugin</artifactId>
+							<version>2.5.2</version>
+							<configuration>
+								<argLine>-Dfile.encoding=utf-8</argLine>
+								<encoding>utf-8</encoding>
+								<instrumentation>
+									<ignores>
+										<ignore>**/action/**.class</ignore>
+									</ignores>
+									<excludes>
+										<exclude>**/action/**.class</exclude>
+									</excludes>
+								</instrumentation>
+								<check>
+									<branchRate>85</branchRate>
+									<lineRate>85</lineRate>
+									<haltOnFailure>true</haltOnFailure>
+									<totalBranchRate>85</totalBranchRate>
+									<totalLineRate>85</totalLineRate>
+									<packageLineRate>85</packageLineRate>
+									<packageBranchRate>85</packageBranchRate>
+									<regexes>
+										<regex>
+											<pattern>com.example.reallyimportant.*</pattern>
+											<branchRate>90</branchRate>
+											<lineRate>80</lineRate>
+										</regex>
+										<regex>
+											<pattern>com.example.boringcode.*</pattern>
+											<branchRate>40</branchRate>
+											<lineRate>30</lineRate>
+										</regex>
+									</regexes>
+								</check>
+								<executions>
+									<execution>
+										<goals>
+											<goal>clean</goal>
+										</goals>
+									</execution>
+								</executions>
+							</configuration>
+						</plugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

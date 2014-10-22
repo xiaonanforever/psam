@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- <property resource="properties/logback.properties" /> -->
+	<jmxConfigurator />
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date -%msg [%thread] %-5level %logger{1} %M %L %n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="messageFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/forever/logs/msg.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/home/forever/logs/msg.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>20mb</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %msg %-5level [%-20thread] %logger{1} %M %L %n
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="async" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>10240</queueSize>
+		<appender-ref ref="messageFile" />
+	</appender>
+	<appender name="msgRspNoTime"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/forever/logs/msg.rsp.notime.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/home/forever/logs/msg.rsp.notime.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>20mb</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="msgReqNoTime"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/forever/logs/msg.req.notime.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/home/forever/logs/msg.req.notime.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>20mb</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="msgReqTimeout"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/forever/logs/msg.req.timeout.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/home/forever/logs/msg.req.timeout.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>20mb</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="msgDead"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- <filter class="com.topdot.mock.MsgDeadFilter" /> -->
+		<file>/home/forever/logs/msg.dead.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/home/forever/logs/msg.dead.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>20mb</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.topdot">
+		<level value="INFO" />
+		<appender-ref ref="stdout" />
+	</logger>
+	<!--  
+	<logger name="com.topdot">
+        <level value="INFO" />
+        <appender-ref ref="stdout" />
+    </logger>
+    -->
+	<!-- 
+	<logger name="com.topdot.framework.message.config">
+		<level value="INFO" />
+		<appender-ref ref="async" />
+	</logger>
+	 -->
+	<!-- <logger name="com.topdot"> <level value="INFO" /> <appender-ref ref="async" 
+		/> </logger> <logger name="com.topdot.framework.message.MessageServiceTemplate"> 
+		<level value="INFO" /> <appender-ref ref="async" /> </logger> -->
+	<!-- 响应过期LOGGER -->
+	<logger name="msgRspNoTime">
+		<level value="INFO" />
+		<appender-ref ref="msgRspNoTime" />
+	</logger>
+
+	<!-- 请求过期LOGGER -->
+	<logger name="msgReqNoTime">
+		<level value="INFO" />
+		<appender-ref ref="msgReqNoTime" />
+	</logger>
+
+	<!-- 请求超时LOGGER -->
+	<logger name="msgReqTimeout">
+		<level value="INFO" />
+		<appender-ref ref="msgReqTimeout" />
+	</logger>
+
+	<!-- 请求超时LOGGER -->
+	<logger name="msgDead">
+		<level value="WARN" />
+		<appender-ref ref="msgDead" />
+	</logger>
+	
+	<logger name="com.topdot.framework.message.LoadRunTest">
+		<level value="INFO" />
+		<appender-ref ref="stdout" />
+	</logger>
+	<!-- 
+	<logger name="com.topdot.framework.message.perf">
+		<level value="INFO" />
+		<appender-ref ref="stdout" />
+	</logger>
+	<root> <level value="WARN" /> <appender-ref ref="stdout" /> </root>
+	 -->
+</configuration>
