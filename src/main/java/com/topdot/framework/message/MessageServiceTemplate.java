@@ -177,8 +177,7 @@ public abstract class MessageServiceTemplate implements MessageService {
 
 	@Override
 	public synchronized ResponseMessage logon(RequestMessage<? extends MessageHeader, ? extends MessageBody> reqMsg) {
-		LOGGER.info("终端<{}>第{}次登陆...", config.getServiceConfig().getCommonParameterTerminalNo(),
-				logTimes.incrementAndGet());
+		LOGGER.info("终端<{}>第{}次登陆...", config.getServiceConfig().getCommonParameterTerminalNo(), logTimes.incrementAndGet());
 		logonReqMsg = reqMsg;
 		ResponseMessage rspMsg = null;
 		if (State.LOGON.equals(state)) {
@@ -187,8 +186,7 @@ public abstract class MessageServiceTemplate implements MessageService {
 			// rspMsg = bizLogon(reqMsg);
 		} else if (State.CONNECT.equals(state)) {
 			rspMsg = bizLogon(reqMsg);
-		}
-		else {
+		} else {
 			rspMsg = phyLogon();
 			if (rspMsg.success()) {
 				rspMsg = bizLogon(reqMsg);
@@ -282,8 +280,7 @@ public abstract class MessageServiceTemplate implements MessageService {
 	 * @return boolean
 	 * @see call 同步调用
 	 */
-	public void acall(RequestMessage<? extends MessageHeader, ? extends MessageBody> requestMsg)
-			throws RequestException {
+	public void acall(RequestMessage<? extends MessageHeader, ? extends MessageBody> requestMsg) throws RequestException {
 		if (state.equals(State.LOGON)) {
 			requestChannel.acall(requestMsg);
 		} else {

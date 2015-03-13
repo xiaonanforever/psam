@@ -43,7 +43,7 @@ public class SocketServiceImpl extends MessageServiceTemplate {
 			if (!clntChan.connect(new InetSocketAddress(sc.getServerIp(), sc.getServerPort()))) {
 				while (!clntChan.finishConnect());
 			}
-			ChannelDispatchService.register(this);
+			ChannelDispatchService.registe(this);
 			socket = clntChan.socket();
 			socket.setReceiveBufferSize(10 * 1024);
 			socket.setTcpNoDelay(true);

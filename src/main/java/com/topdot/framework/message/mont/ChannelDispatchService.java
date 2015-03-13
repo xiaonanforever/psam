@@ -84,10 +84,11 @@ public class ChannelDispatchService implements Runnable {
 	public void run() {
 		es = Executors.newFixedThreadPool(channelNum, new MsgThreadFactory("I/O-RSP"));
 		// 开启一批Response Channel
+		LOGGER.info("响应通道数目-[{}]",channelNum);
 		for (int i = 0; i < channelNum; i++) {
-			LOGGER.info("构建响应通道...");
+			LOGGER.info("构建响应通道[{}]...",i);
 			IOResponseChannelImpl rspChannel = new IOResponseChannelImpl();
-			LOGGER.info("设置响应通道的FilterChain...");
+			LOGGER.info("设置响应通道[{}]的FilterChain...",i);
 			FilterChain rspChain = new FilterChainImpl();
 			// TODO权益之计，只有采用了加密算法，才加入
 //			if (useEncrypt) {
@@ -151,7 +152,7 @@ public class ChannelDispatchService implements Runnable {
 	 * @return void
 	 * @see
 	 */
-	public static void register(SocketServiceImpl socketServiceImpl) {
+	public static void registe(SocketServiceImpl socketServiceImpl) {
 		synchronized (ChannelDispatchService.class) {
 			try {
 				if (serivce == null) {

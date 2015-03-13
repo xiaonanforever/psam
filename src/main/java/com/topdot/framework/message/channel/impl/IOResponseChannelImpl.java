@@ -62,8 +62,8 @@ public class IOResponseChannelImpl extends AbstractResponseChannel implements Ru
 	public void run() {
 		while (true) {
 			try {
-				LOGGER.info("消息驱动...");
 				MessageServiceChannel msc = ActiveSocketChannel.take();
+				LOGGER.info("消息驱动...");
 				mst = msc.getMst();
 				clntChan = msc.getSocketChannel();
 				String headContent;

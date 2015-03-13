@@ -87,17 +87,18 @@ public class PsamServer {
 		RequestMessageQueue reqMsgQueue = new RequestMessageQueue();
 		reqMsgQueue.setMaxSize(sc.getReqMaxSize());
 
-		LOGGER.info("构建消息处理线程池...");
+		
 		ExecutorService esReqWorkPool = Executors.newFixedThreadPool(sc.getWorkerThread(), new MsgThreadFactory(
 				"Req-Worker"));
+		LOGGER.info("构建消息处理线程池,线程数目:[{}]...",sc.getWorkerThread());
 		for (int i = 0; i < sc.getWorkerThread(); i++) {
 			ReqWorker reqWorker = new ReqWorker(reqMsgQueue, mc.getMessageDefByIdMap());
 			esReqWorkPool.execute(reqWorker);
 		}
 
-		LOGGER.info("构建消息受理线程池...");
 		ExecutorService esReqReciverPool = Executors.newFixedThreadPool(sc.getClientWorkerNumber(),
 				new MsgThreadFactory("Req-Reciver"));
+		LOGGER.info("构建消息受理线程池,线程数目:[{}]...",sc.getClientWorkerNumber());
 		for (int i = 0; i < sc.getClientWorkerNumber(); i++) {
 			LOGGER.info("设置请求受理Filter...");
 			FilterChain reqChain = new FilterChainImpl();
