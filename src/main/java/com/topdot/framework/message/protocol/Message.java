@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * <p>Message</p>
  * 
- * <p> 消息根接口 </p>
+ * <p> 消息根类,包含维度分为Header和Body,继承角度一般有请求(Request)和响应(Response) </p>
  * 
  * <p> Copyright: 版权所有 (c) 2010 - 2014 </p>
  * <p> Company: xxx </p>
