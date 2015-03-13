@@ -7,56 +7,47 @@
 	<packaging>jar</packaging>
 	<name>psam</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<parent>
 		<groupId>com.cslc.aom</groupId>
 		<artifactId>aggregator</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../aggregator/pom.xml</relativePath>
 	</parent>
-	
+
 	<dependencies>
 		<!-- 研究学习 -->
 		<!-- Java Socket Lib over NIO -->
-		<!--  
-		<dependency>
-			<groupId>org.apache.mina</groupId>
-			<artifactId>mina-core</artifactId>
-			<version>2.0.7</version>
-			<type>bundle</type>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.mina</groupId>
-			<artifactId>mina-integration-beans</artifactId>
-			<version>2.0.7</version>
-			<type>bundle</type>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.mina</groupId>
-			<artifactId>mina-integration-jmx</artifactId>
-			<version>2.0.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.mina</groupId>
-			<artifactId>mina-statemachine</artifactId>
-			<version>2.0.7</version>
-		</dependency>-->
+		<!-- <dependency> <groupId>org.apache.mina</groupId> <artifactId>mina-core</artifactId> 
+			<version>2.0.7</version> <type>bundle</type> </dependency> <dependency> <groupId>org.apache.mina</groupId> 
+			<artifactId>mina-integration-beans</artifactId> <version>2.0.7</version> 
+			<type>bundle</type> </dependency> <dependency> <groupId>org.apache.mina</groupId> 
+			<artifactId>mina-integration-jmx</artifactId> <version>2.0.7</version> </dependency> 
+			<dependency> <groupId>org.apache.mina</groupId> <artifactId>mina-statemachine</artifactId> 
+			<version>2.0.7</version> </dependency> -->
 		<!-- 串口通信库 -->
-		<!--  
-		<dependency>
-			<groupId>org.rxtx</groupId>
-			<artifactId>rxtx</artifactId>
-			<version>2.1.7</version>
-			<scope>provided</scope>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>org.rxtx</groupId> <artifactId>rxtx</artifactId> 
+			<version>2.1.7</version> <scope>provided</scope> </dependency> -->
 		<!-- Test Dependency -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.networkbench.newlens.agent.android</groupId>
+			<artifactId>nbs.newlens.agent</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.networkbench.newlens.agent.android</groupId>
+			<artifactId>nbs.newlens.class.rewriter</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.networkbench.newlens.agent.android</groupId>
+			<artifactId>agent-maven-plugin</artifactId>
+			<version>1.2.1</version>
 		</dependency>
 	</dependencies>
 	<build>
