@@ -12,12 +12,8 @@
 
 package com.topdot.framework.message.executor;
 
-import java.util.Date;
-
 import com.topdot.framework.message.protocol.RequestMessage;
 import com.topdot.framework.message.protocol.ResponseMessage;
-import com.topdot.psam.message.protocol.PsamReqHeader;
-import com.topdot.psam.message.protocol.PsamRspHeader;
 
 /**
  * <p>异步报告消息抽象类</p>
@@ -33,7 +29,7 @@ import com.topdot.psam.message.protocol.PsamRspHeader;
 
 public abstract class AbstractMessageExecutor<Q extends RequestMessage<?, ?>,P extends ResponseMessage> implements MessageExecutor<Q,P> {
 	
-	public static PsamRspHeader mockRsp(PsamReqHeader reqHeader) {
+	/*public static PsamRspHeader mockRsp(PsamReqHeader reqHeader) {
 		// MessageHeader数据
 		PsamRspHeader rspHeader = new PsamRspHeader();
 		rspHeader.setSequenceId(reqHeader.getSequenceId());
@@ -57,5 +53,5 @@ public abstract class AbstractMessageExecutor<Q extends RequestMessage<?, ?>,P e
 		//rspHeader.setVersionNo("VersionNo");
 
 		return rspHeader;
-	}
+	}*/
 }
